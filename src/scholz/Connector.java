@@ -3,7 +3,6 @@ package scholz;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
  * Stellt die Verbindung mit der Datenbank her
@@ -27,19 +26,16 @@ public class Connector {
     
     /**
      * stellt eine Verbindung zu Datenbank her
+     * @throws java.sql.SQLException
      */
-    public void connect() {
+    public void connect() throws SQLException {
         ds.setServerName(cd.getHost());
         ds.setUser(cd.getUser());
         ds.setPassword(cd.getPassword());
         ds.setDatabaseName(cd.getDatabase());
         
-        try {
-            con = ds.getConnection();
-            status = ConnectStatus.CONNECTED;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Verbindung zur Datenbank konnte nicht hergestellt werden\nGrund: " + ex.getMessage(), "ERROR !", JOptionPane.ERROR_MESSAGE);
-        }
+        con = ds.getConnection();
+        status = ConnectStatus.CONNECTED;
     }
     
     /**

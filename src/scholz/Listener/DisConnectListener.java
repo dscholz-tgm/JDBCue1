@@ -7,7 +7,7 @@ import scholz.GUI.ConnectPanel;
 import scholz.GUI.GUI;
 
 /**
- * Listener für den ConnectButton
+ * Listener für den DisConnectButton
  * 
  * @author Dominik
  * @version 0.3
