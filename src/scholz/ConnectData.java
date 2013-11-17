@@ -4,17 +4,17 @@ package scholz;
  * Beinhaltet die Verbindungsdaten
  *
  * @author Dominik
- * @version 0.1
+ * @version 0.2
  */
 public class ConnectData {
-
-    private static ConnectData i = new ConnectData();
-    public static ConnectData get() { return i; };
     
     private String host = "";
     private String user = "";
     private String password = "";
     private String database = "";
+    
+    private static ConnectData i = new ConnectData();
+    public static ConnectData get() { return i; };
 
     public String getHost() {
         return host;

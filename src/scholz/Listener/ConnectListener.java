@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import scholz.ConnectData;
 import scholz.GUI.ConnectPanel;
+import scholz.GUI.GUI;
 
 /**
  * Listener für den ConnectButton
@@ -27,6 +28,7 @@ public class ConnectListener implements ActionListener {
         ConnectData.get().setDatabase(cp.getDatabase());
         //Connector aufrufen und versuchen zu verbinden
         //Status aktualisieren
+        GUI.get().enableTabs();
     }
     
 }
