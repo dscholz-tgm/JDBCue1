@@ -51,8 +51,8 @@ public class ConnectPanel extends JPanel {
         centerPanel = new JPanel(new BorderLayout());
         centerPanel.add(connectData,BorderLayout.NORTH);
         
-        connectInfo = new JLabel(ConnectStatus.NOT_CONNETED.getText(),JLabel.CENTER); //Auswechseln durch Variablen Zustand
-        connectInfo.setForeground(Color.RED); //Auswechseln durch Variablen Zustand
+        connectInfo = new JLabel(ConnectStatus.NOT_CONNECTED.getText(),JLabel.CENTER);
+        connectInfo.setForeground(Color.RED);
         
         centerPanel.add(connectInfo,BorderLayout.CENTER);
         
@@ -90,10 +90,11 @@ public class ConnectPanel extends JPanel {
     
     /**
      * Updated den Statustext
+     * @param status der Status auf den Upgedated werden soll
      */
-    public void updateStatus() {
-        connectInfo.setText(ConnectStatus.CONNECTED.getText());
-        connectInfo.setForeground(ConnectStatus.CONNECTED.getColor());
+    public void updateStatus(ConnectStatus status) {
+        connectInfo.setText(status.getText());
+        connectInfo.setForeground(status.getColor());
     }
     
 }

@@ -2,6 +2,7 @@ package scholz.Listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import scholz.Connector;
 import scholz.GUI.ConnectPanel;
 import scholz.GUI.GUI;
 
@@ -9,7 +10,7 @@ import scholz.GUI.GUI;
  * Listener für den ConnectButton
  * 
  * @author Dominik
- * @version 0.2
+ * @version 0.3
  */
 public class DisConnectListener implements ActionListener {
     
@@ -21,8 +22,8 @@ public class DisConnectListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        //Connector aufrufen und verbindung trennen
-        //Status aktualisieren
+        Connector.get().disconnect();
+        cp.updateStatus(Connector.get().getStatus());
         GUI.get().disableTabs();
     }
     
