@@ -19,7 +19,7 @@ import scholz.Listener.DisConnectListener;
  * Panel zur Darstellung der Verbindungsinformationen
  * 
  * @author Dominik
- * @version 0.3
+ * @version 0.4
  */
 public class ConnectPanel extends JPanel {
     
@@ -88,6 +88,9 @@ public class ConnectPanel extends JPanel {
         return databaseField.getText();
     }
     
+    /**
+     * Updated den Statustext
+     */
     public void updateStatus() {
         connectInfo.setText(ConnectStatus.CONNECTED.getText());
         connectInfo.setForeground(ConnectStatus.CONNECTED.getColor());

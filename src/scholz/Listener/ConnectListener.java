@@ -10,7 +10,7 @@ import scholz.GUI.GUI;
  * Listener für den ConnectButton
  * 
  * @author Dominik
- * @version 0.1
+ * @version 0.2
  */
 public class ConnectListener implements ActionListener {
     
