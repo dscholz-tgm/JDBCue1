@@ -1,6 +1,5 @@
 package scholz.GUI;
 
-import scholz.Listener.ConnectListener;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -13,6 +12,7 @@ import javax.swing.JTextField;
 
 import scholz.ConnectData;
 import scholz.ConnectStatus;
+import scholz.Listener.ConnectListener;
 import scholz.Listener.DisConnectListener;
 
 /**

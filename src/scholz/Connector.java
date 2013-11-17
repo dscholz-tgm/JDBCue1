@@ -24,6 +24,10 @@ public class Connector {
         return status;
     }
     
+    public Connection con() {
+        return con;
+    }
+    
     /**
      * stellt eine Verbindung zu Datenbank her
      * @throws java.sql.SQLException

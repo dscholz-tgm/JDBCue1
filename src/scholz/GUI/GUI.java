@@ -11,7 +11,7 @@ import scholz.Listener.TabListener;
  * Hauptframe der GUI
  * 
  * @author Dominik
- * @version 0.4
+ * @version 0.5
  */
 public class GUI {
     
@@ -33,7 +33,7 @@ public class GUI {
 
         tp = new JTabbedPane();
         tp.addTab("Connect", new ConnectPanel());
-        tp.addTab("Show", new JPanel());
+        tp.addTab("Show", new ShowPanel());
         tp.addTab("Insert", new JPanel());
         tp.addChangeListener(new TabListener());
         
