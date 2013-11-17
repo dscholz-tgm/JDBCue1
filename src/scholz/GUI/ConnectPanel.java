@@ -2,6 +2,7 @@ package scholz.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,7 +24,7 @@ public class ConnectPanel extends JPanel {
     private JTextField hostField, userField, databaseField;
     private JPasswordField passwordField;
     private JButton connect;
-    private JPanel connectData;
+    private JPanel centerPanel,connectData;
     private JLabel connectInfo;
 
     public ConnectPanel() {
@@ -34,8 +35,6 @@ public class ConnectPanel extends JPanel {
         databaseField = new JTextField(cd.getDatabase());
         passwordField = new JPasswordField(cd.getPassword());
         connect = new JButton("connect");
-        
-        this.setLayout(new BorderLayout());
         
         connectData = new JPanel(new GridLayout(4,2)); //Ev. in GridBagLayout ändern
         
@@ -48,14 +47,19 @@ public class ConnectPanel extends JPanel {
         connectData.add(new JLabel("Database:"));
         connectData.add(databaseField);
         
-        this.add(connectData,BorderLayout.NORTH);
+        centerPanel = new JPanel(new BorderLayout());
+        centerPanel.add(connectData,BorderLayout.NORTH);
         
-        connectInfo = new JLabel(ConnectStatus.NOT_CONNETED.getText());
-        connectInfo.setForeground(Color.RED);
-        this.add(connectInfo,BorderLayout.CENTER);
+        connectInfo = new JLabel(ConnectStatus.NOT_CONNETED.getText()); //Auswechseln durch Variablen Zustand
+        connectInfo.setForeground(Color.RED); //Auswechseln durch Variablen Zustand
+        
+        centerPanel.add(connectInfo,BorderLayout.CENTER);
         
         connect = new JButton("connect");
-        this.add(connect,BorderLayout.SOUTH);
+        centerPanel.add(connect,BorderLayout.SOUTH);
+        
+        this.setLayout(new FlowLayout());
+        this.add(centerPanel);
     }
     
 }

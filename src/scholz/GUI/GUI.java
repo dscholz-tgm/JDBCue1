@@ -27,7 +27,7 @@ public class GUI {
         }
         
         JFrame jf = new JFrame("Datenbankansicht");
-        jf.setBounds(100, 100, 800, 400);
+        jf.setBounds(400, 400, 320, 320);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTabbedPane tp = new JTabbedPane();
