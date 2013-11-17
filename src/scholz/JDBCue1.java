@@ -17,10 +17,12 @@ public class JDBCue1 {
      */
     public static void main(String[] args) {
         ConnectData cd = ConnectData.get();
-        GUI.get();
-        if(!cd.parse(args)) {
-            
+
+        if(cd.parse(args)) {
+            System.out.println("parsed succesfully!");
         }
+        
+        GUI.get();
     }
 
 }
