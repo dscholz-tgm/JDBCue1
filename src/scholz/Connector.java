@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  * Stellt die Verbindung mit der Datenbank her
  * 
  * @author Dominik
- * @version 0.1
+ * @version 0.2
  */
 public class Connector {
 
@@ -46,6 +46,7 @@ public class Connector {
      * trennt die Verbindung zur Datenbank
      */
     public void disconnect() {
+        if(con == null) return;
         try {
             con.close();
         } catch (SQLException ex) {
