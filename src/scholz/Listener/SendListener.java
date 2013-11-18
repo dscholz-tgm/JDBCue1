@@ -31,7 +31,7 @@ public class SendListener implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String sql = sp.getSql();
         if (!sql.endsWith(";")) sql += ";";
-        if(!InjectionValidator.validate(sp.getSql())) {
+        if(!InjectionValidator.validate(sql)) {
             JOptionPane.showMessageDialog(null,"Verbotener SQL Befehl: " + sql, "ERROR !", JOptionPane.ERROR_MESSAGE);
             return;
         }
