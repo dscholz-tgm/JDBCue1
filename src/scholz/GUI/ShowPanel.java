@@ -2,55 +2,60 @@ package scholz.GUI;
 
 import scholz.Listener.SendListener;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
  * Panel zur Darstellung der Datentabellen
  * 
  * @author Dominik
- * @version 0.2
+ * @version 0.4
  */
 public class ShowPanel extends JPanel {
     
     private JTextField sqlField;
     private JButton send;
-    private JPanel centerPanel,headerPanel;
+    private JPanel centerPanel,headerPanel,sendPanel;
     private JTable table;
 
     public ShowPanel() {
 
-        centerPanel = new JPanel(new BorderLayout());
-        headerPanel = new JPanel(new GridLayout(3,1));
+        centerPanel = new JPanel(new GridLayout(2,1));
+        headerPanel = new JPanel(new FlowLayout());
+        sendPanel = new JPanel(new FlowLayout());
                 
         sqlField = new JTextField();
                 
         send = new JButton("senden");
         send.addActionListener(new SendListener(this));
         
-        headerPanel.add(new JLabel("SQL Befehl:                                     (nur SELECT, SHOW und DESCRIBE)"));
-        headerPanel.add(sqlField);
-        headerPanel.add(send);
-        centerPanel.add(headerPanel,BorderLayout.NORTH);
+        headerPanel.add(new JLabel("SQL Befehl:                       "));
+        JLabel zusatzInfo = new JLabel("(nur SELECT, SHOW und DESCRIBE)");
+        zusatzInfo.setForeground(Color.GRAY);
+        headerPanel.add(zusatzInfo);
+        sqlField.setPreferredSize(new Dimension(480,24));
+        sendPanel.add(sqlField);
+        sendPanel.add(send);
+        centerPanel.add(headerPanel);
+        centerPanel.add(sendPanel);
         
         table = new JTable();
-        centerPanel.add(new JScrollPane(table),BorderLayout.CENTER);
         table.setFillsViewportHeight(true);
         table.setEnabled(false);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
-        this.setLayout(new FlowLayout());
-        this.add(centerPanel);
+        this.setLayout(new BorderLayout());
+        this.add(centerPanel,BorderLayout.NORTH);
+        this.add(new JScrollPane(table),BorderLayout.CENTER);
     }
     
     public String getSql() {

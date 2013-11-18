@@ -11,7 +11,7 @@ import scholz.Listener.TabListener;
  * Hauptframe der GUI
  * 
  * @author Dominik
- * @version 0.5
+ * @version 0.6
  */
 public class GUI {
     
@@ -28,7 +28,7 @@ public class GUI {
         }
         
         jf = new JFrame("Datenbankansicht");
-        jf.setBounds(400, 400, 320, 320);
+        jf.setBounds(400, 400, TabSize.CONNECT.getWidth(),TabSize.CONNECT.getHeight());
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         tp = new JTabbedPane();

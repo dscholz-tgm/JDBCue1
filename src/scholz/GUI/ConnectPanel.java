@@ -2,6 +2,7 @@ package scholz.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ import scholz.Listener.DisConnectListener;
  * Panel zur Darstellung der Verbindungsinformationen
  * 
  * @author Dominik
- * @version 0.4
+ * @version 0.5
  */
 public class ConnectPanel extends JPanel {
     
@@ -49,10 +50,12 @@ public class ConnectPanel extends JPanel {
         connectData.add(databaseField);
         
         centerPanel = new JPanel(new BorderLayout());
+        connectData.setPreferredSize(new Dimension(240,84));
         centerPanel.add(connectData,BorderLayout.NORTH);
         
         connectInfo = new JLabel(ConnectStatus.NOT_CONNECTED.getText(),JLabel.CENTER);
-        connectInfo.setForeground(Color.RED);
+        connectInfo.setPreferredSize(new Dimension(100,40));
+        connectInfo.setForeground(ConnectStatus.NOT_CONNECTED.getColor());
         
         centerPanel.add(connectInfo,BorderLayout.CENTER);
         

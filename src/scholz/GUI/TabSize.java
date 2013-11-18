@@ -4,10 +4,10 @@ package scholz.GUI;
  * Tabgrößen
  * 
  * @author Dominik
- * @version 0.1
+ * @version 0.2
  */
 public enum TabSize {
-    CONNECT(320,320),
+    CONNECT(280,240),
     SHOW(800,400),
     INSERT(600,400);
     
