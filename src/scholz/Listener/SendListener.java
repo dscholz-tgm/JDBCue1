@@ -1,5 +1,6 @@
 package scholz.Listener;
 
+import scholz.InjectionValidator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import scholz.GUI.ShowPanel;
  * Listener für den SendButton
  * 
  * @author Dominik
- * @version 0.1
+ * @version 0.2
  */
 public class SendListener implements ActionListener {
     
@@ -29,7 +30,11 @@ public class SendListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         String sql = sp.getSql();
-        //WARNING SQL umbedingt parsen ansonsten SQL Injection
+        if (!sql.endsWith(";")) sql += ";";
+        if(!InjectionValidator.validate(sp.getSql())) {
+            JOptionPane.showMessageDialog(null,"Verbotener SQL Befehl: " + sql, "ERROR !", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         try {
             Statement stmnt = Connector.get().con().createStatement();
             ResultSet rs = stmnt.executeQuery(sql);
