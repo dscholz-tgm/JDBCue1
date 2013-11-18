@@ -4,7 +4,7 @@ package scholz;
  * Beinhaltet die Verbindungsdaten
  *
  * @author Dominik
- * @version 0.2
+ * @version 0.3
  */
 public class ConnectData {
     
@@ -54,21 +54,14 @@ public class ConnectData {
      * @return Ob das Parsen Erfolgreich war
      */
     public boolean parse(String[] args) {
-        if (args == null || args.length != 8) return false;
+        if (args == null) return false;
         
-        int i = 0;
-        
-        if (args[i++].equals("-h")) host = args[i++];
-        else return false;
-        
-        if (args[i++].equals("-u")) user = args[i++];
-        else return false;
-        
-        if (args[i++].equals("-p")) password = args[i++];
-        else return false;
-        
-        if (args[i++].equals("-d")) database = args[i++];
-        else return false;
+        for(int i = 0; i < (args.length % 2 == 0 ? args.length : args.length-1); i++) {
+            if(args[i].equals("-h") && host.equals("")) host = args[++i];
+            else if (args[i].equals("-u") && user.equals("")) user = args[++i];
+            else if (args[i].equals("-p") && password.equals("")) password = args[++i];
+            else if (args[i].equals("-d") && database.equals("")) database = args[++i];
+        }
         
         return true;
     }
