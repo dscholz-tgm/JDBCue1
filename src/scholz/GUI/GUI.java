@@ -1,7 +1,6 @@
 package scholz.GUI;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -11,17 +10,20 @@ import scholz.Listener.TabListener;
  * Hauptframe der GUI
  * 
  * @author Dominik
- * @version 0.6
+ * @version 0.7
  */
 public class GUI {
     
     private JTabbedPane tp;
     private JFrame jf;
+    private ConnectPanel connectPanel;
+    private ShowPanel showPanel;
+    private InsertPanel insertPanel;
     
     private static GUI i = new GUI();
     public static GUI get() { return i; };
 
-    public GUI() {
+    private GUI() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -31,16 +33,32 @@ public class GUI {
         jf.setBounds(400, 400, TabSize.CONNECT.getWidth(),TabSize.CONNECT.getHeight());
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        connectPanel = new ConnectPanel();
+        showPanel = new ShowPanel();
+        insertPanel = new InsertPanel();
+        
         tp = new JTabbedPane();
-        tp.addTab("Connect", new ConnectPanel());
-        tp.addTab("Show", new ShowPanel());
-        tp.addTab("Insert", new JPanel());
+        tp.addTab("Connect", connectPanel);
+        tp.addTab("Show", showPanel);
+        tp.addTab("Insert", insertPanel);
         tp.addChangeListener(new TabListener());
         
         disableTabs();
         
         jf.add(tp);
         jf.setVisible(true);
+    }
+
+    public ConnectPanel getConnectPanel() {
+        return connectPanel;
+    }
+
+    public ShowPanel getShowPanel() {
+        return showPanel;
+    }
+
+    public InsertPanel getInsertPanel() {
+        return insertPanel;
     }
     
     /**
