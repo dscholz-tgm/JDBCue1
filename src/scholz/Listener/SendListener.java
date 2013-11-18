@@ -3,9 +3,12 @@ package scholz.Listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import scholz.Connector;
 import scholz.GUI.ShowPanel;
 
@@ -30,12 +33,42 @@ public class SendListener implements ActionListener {
         try {
             Statement stmnt = Connector.get().con().createStatement();
             ResultSet rs = stmnt.executeQuery(sql);
-            sp.updateTable(rs);
+            sp.updateTable(generateModel(rs));
             rs.close();
             stmnt.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Fehler beim Ausführen der Query:\n\nQuery: " + sql + "\nError:"+ ex.getMessage(), "ERROR !", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    /**
+     * generiert die neue Tabelle
+     * @param rs das ResultSet
+     * @return die neue Tabelle
+     * @throws SQLException 
+     */
+    private TableModel generateModel(ResultSet rs) throws SQLException {
+        DefaultTableModel newTable = new DefaultTableModel();
+        
+        //Spaltennamen
+        ResultSetMetaData mdata = rs.getMetaData();
+        int columnCount = mdata.getColumnCount();
+        String[] colNames = new String[columnCount];
+        for (int i = 1; i <= columnCount; i++) {
+            colNames[i-1] = mdata.getColumnName(i);
+        }
+        newTable.setColumnIdentifiers(colNames);
+ 
+        //Werte
+        while (rs.next()) {
+            String[] rowData = new String[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                rowData[i - 1] = rs.getString(i);
+            }
+            newTable.addRow(rowData);
+        }
+
+        return newTable;
     }
     
 }

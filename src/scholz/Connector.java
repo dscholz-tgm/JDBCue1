@@ -33,6 +33,7 @@ public class Connector {
      * @throws java.sql.SQLException
      */
     public void connect() throws SQLException {
+        if (con != null) con.close();
         ds.setServerName(cd.getHost());
         ds.setUser(cd.getUser());
         ds.setPassword(cd.getPassword());

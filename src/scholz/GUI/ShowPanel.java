@@ -7,19 +7,20 @@ import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  * Panel zur Darstellung der Datentabellen
  * 
  * @author Dominik
- * @version 0.1
+ * @version 0.2
  */
 public class ShowPanel extends JPanel {
     
@@ -44,8 +45,9 @@ public class ShowPanel extends JPanel {
         centerPanel.add(headerPanel,BorderLayout.NORTH);
         
         table = new JTable();
-        
-        centerPanel.add(table,BorderLayout.CENTER);
+        centerPanel.add(new JScrollPane(table),BorderLayout.CENTER);
+        table.setFillsViewportHeight(true);
+        table.setEnabled(false);
         
         this.setLayout(new FlowLayout());
         this.add(centerPanel);
@@ -57,30 +59,10 @@ public class ShowPanel extends JPanel {
 
     /**
      * updated die Tabelle
-     * @param rs das ResultSet mit dem die Tabelle befüllt wird
+     * @param tm Das neue TableModel
      */
-    public void updateTable(ResultSet rs) throws SQLException {
-
-        ResultSetMetaData metaData = rs.getMetaData();
-
-        // names of columns
-        Vector<String> columnNames = new Vector<String>();
-        int columnCount = metaData.getColumnCount();
-        for (int column = 1; column <= columnCount; column++) {
-            columnNames.add(metaData.getColumnName(column));
-        }
-
-        // data of the table
-        Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-        while (rs.next()) {
-            Vector<Object> vector = new Vector<Object>();
-            for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                vector.add(rs.getObject(columnIndex));
-            }
-            data.add(vector);
-        }
-
-        table = new JTable(new DefaultTableModel(data, columnNames));
+    public void updateTable(TableModel tm) {
+        table.setModel(tm);
     }
 
 }
