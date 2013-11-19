@@ -2,7 +2,6 @@ package scholz.GUI;
 
 import scholz.Listener.ComboBoxListener;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ import scholz.Listener.InsertListener;
  * Panel zum Einsetzen der Datensätze
  * 
  * @author Dominik
- * @version 0.2
+ * @version 0.4
  */
 public class InsertPanel extends JPanel {
     
@@ -36,11 +35,12 @@ public class InsertPanel extends JPanel {
         headerPanel = new JPanel(new GridLayout(1,2));
                 
         insert = new JButton("einfügen");
-        insert.addActionListener(new InsertListener(this));
+        InsertListener il = new InsertListener(this);
+        insert.addActionListener(il);
         
         headerPanel.add(new JLabel("Datensätze einfügen:"));
         comboBox = new JComboBox();
-        comboBox.addActionListener(new ComboBoxListener(this));
+        comboBox.addActionListener(new ComboBoxListener(this,il));
         headerPanel.add(comboBox);
 
         northPanel = new JPanel(new BorderLayout());
@@ -51,6 +51,10 @@ public class InsertPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(northPanel,BorderLayout.NORTH);
         this.add(insert,BorderLayout.SOUTH);
+    }
+
+    public List<JTextField> getTextFields() {
+        return textFields;
     }
 
     /**

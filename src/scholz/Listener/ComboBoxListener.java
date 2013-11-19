@@ -3,6 +3,7 @@ package scholz.Listener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
@@ -17,14 +18,16 @@ import scholz.GUI.InsertPanel;
  * Listener für die ComboBox
  * 
  * @author Dominik
- * @version 0.1
+ * @version 0.3
  */
 public class ComboBoxListener implements ActionListener {
     
     private InsertPanel ip;
+    private InsertListener il;
 
-    public ComboBoxListener(InsertPanel ip) {
+    public ComboBoxListener(InsertPanel ip, InsertListener il) {
         this.ip = ip;
+        this.il = il;
     }
 
     @Override
@@ -40,9 +43,30 @@ public class ComboBoxListener implements ActionListener {
             }
             GUI.get().getInsertPanel().updateInsertFields(labels);
             rs.close();
+            
+            rs = stmnt.executeQuery("SELECT * FROM " + table + " LIMIT 0;");
+            ResultSetMetaData md = rs.getMetaData();
+            List<Integer> typeList = new LinkedList<>();
+            for (int i = 1; i <= md.getColumnCount(); i++) {
+                typeList.add(md.getColumnType(i));
+            }
+            prepareStatement(table,labels.size(),typeList);
+            rs.close();
             stmnt.close();
+            ip.updateInsertFields(labels);
         } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+    }
+    
+    public void prepareStatement(String table, int valueCount, List<Integer> typeList) throws SQLException {
+        StringBuilder sql = new StringBuilder("INSERT INTO " + table + " VALUES (");
+        for (int i = 0; i < valueCount; i++) {
+            sql.append("?");
+            if (i != valueCount-1) sql.append(" ,");
+        }
+        sql.append(");");
+        il.setPreparedStatement(Connector.get().con().prepareStatement(sql.toString()),typeList);
     }
 
 }
