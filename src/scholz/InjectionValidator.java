@@ -9,7 +9,7 @@ package scholz;
 public class InjectionValidator {
     
     private static String[] unallowedText = {"INSERT", "DROP", "CREATE", "GRANT", "UPDATE", "ALTER", "USE", "DELETE"};
-    private static String[] allowedText = {"SELECT", "DESCRIBE", "SHOW"};
+    private static String[] allowedText = {"SELECT", "DESCRIBE", "SHOW", "DESC"};
 
     /**
      * Validiert einen SQL Befehl
