@@ -4,11 +4,12 @@ package scholz;
  * Beinhaltet die Verbindungsdaten
  *
  * @author Dominik
- * @version 0.4
+ * @version 0.5
  */
 public class ConnectData {
     
     private String host, user, password, database;
+    private Database dbType;
     
     private static ConnectData i = new ConnectData();
     public static ConnectData get() { return i; };
@@ -18,6 +19,7 @@ public class ConnectData {
         user = "";
         password = "";
         database = "";
+        dbType = Database.MYSQL; //Default Datenbank
     }
 
     public String getHost() {
@@ -40,6 +42,10 @@ public class ConnectData {
         return password;
     }
 
+    public Database getDatabaseType() {
+        return dbType;
+    }
+    
     public void setPassword(String password) {
         this.password = password;
     }
@@ -50,6 +56,10 @@ public class ConnectData {
 
     public void setDatabase(String database) {
         this.database = database;
+    }
+    
+    public void setDatabaseType(Database dbType) {
+        this.dbType = dbType;
     }
 
     /**
@@ -65,6 +75,7 @@ public class ConnectData {
             else if (args[i].equals("-u") && user.equals("")) user = args[++i];
             else if (args[i].equals("-p") && password.equals("")) password = args[++i];
             else if (args[i].equals("-d") && database.equals("")) database = args[++i];
+            else if (args[i].equals("-s") && dbType == Database.MYSQL) dbType = Database.valueOf(args[++i]);
         }
         
         return true;

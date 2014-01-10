@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import scholz.Connector;
+import scholz.GUI.MessageDisplay;
 import scholz.GUI.ShowPanel;
 
 /**
@@ -32,7 +32,7 @@ public class SendListener implements ActionListener {
         String sql = sp.getSql();
         if(!sql.endsWith(";")) sql += ";";
         if(!InjectionValidator.validate(sql)) {
-            JOptionPane.showMessageDialog(null,"Verbotener SQL Befehl: " + sql, "ERROR !", JOptionPane.ERROR_MESSAGE);
+            MessageDisplay.error("Verbotener SQL Befehl: " + sql);
             return;
         }
         try {
@@ -42,7 +42,7 @@ public class SendListener implements ActionListener {
             rs.close();
             stmnt.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Fehler beim Ausführen der Query:\n\nQuery: " + sql + "\nError:"+ ex.getMessage(), "ERROR !", JOptionPane.ERROR_MESSAGE);
+            MessageDisplay.error("Fehler beim Ausführen der Query:\n\nQuery: " + sql + "\nError:"+ ex.getMessage());
         }
     }
 

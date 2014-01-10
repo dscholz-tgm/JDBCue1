@@ -18,7 +18,7 @@ import scholz.GUI.InsertPanel;
  * Listener für die ComboBox
  * 
  * @author Dominik
- * @version 0.3
+ * @version 0.4
  */
 public class ComboBoxListener implements ActionListener {
     
@@ -55,7 +55,6 @@ public class ComboBoxListener implements ActionListener {
             stmnt.close();
             ip.updateInsertFields(labels);
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
     }
     

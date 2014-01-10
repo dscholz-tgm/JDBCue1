@@ -8,17 +8,17 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import scholz.ConnectData;
 import scholz.Connector;
 import scholz.GUI.ConnectPanel;
 import scholz.GUI.GUI;
+import scholz.GUI.MessageDisplay;
 
 /**
  * Listener für den ConnectButton
  * 
  * @author Dominik
- * @version 0.3
+ * @version 0.4
  */
 public class ConnectListener implements ActionListener {
     
@@ -40,7 +40,7 @@ public class ConnectListener implements ActionListener {
             GUI.get().enableTabs();
             populateComboBox();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Verbindung zur Datenbank konnte nicht hergestellt werden\nGrund: " + ex.getMessage(), "ERROR !", JOptionPane.ERROR_MESSAGE);
+            MessageDisplay.error("Verbindung zur Datenbank konnte nicht hergestellt werden\nGrund: " + ex.getMessage());
         }
     }
 

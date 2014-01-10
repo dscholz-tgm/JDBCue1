@@ -1,8 +1,8 @@
 package scholz;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import javax.sql.DataSource;
 
 /**
  * Stellt die Verbindung mit der Datenbank her
@@ -12,7 +12,6 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private MysqlDataSource ds = new MysqlDataSource();
     private ConnectData cd = ConnectData.get();
     private Connection con;
     private ConnectStatus status = ConnectStatus.NOT_CONNECTED;
@@ -33,11 +32,10 @@ public class Connector {
      * @throws java.sql.SQLException
      */
     public void connect() throws SQLException {
+        DataSource ds = DataSourceFactory.create(cd.getDatabaseType(),cd.getHost(),cd.getDatabase());
         if (con != null) con.close();
-        ds.setServerName(cd.getHost());
-        ds.setUser(cd.getUser());
-        ds.setPassword(cd.getPassword());
-        ds.setDatabaseName(cd.getDatabase());
+        con = ds.getConnection(cd.getUser(), cd.getPassword());
+
         
         con = ds.getConnection();
         status = ConnectStatus.CONNECTED;

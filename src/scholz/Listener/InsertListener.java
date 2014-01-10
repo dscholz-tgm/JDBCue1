@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import scholz.GUI.InsertPanel;
+import scholz.GUI.MessageDisplay;
 
 /**
  * Listener für den Insert Button
@@ -40,9 +40,9 @@ public class InsertListener implements ActionListener {
             }
             stmnt.execute();
             stmnt.clearParameters();
-            JOptionPane.showMessageDialog(null, "Datensatz erfolgreich eingefügt!");
+            MessageDisplay.info("Datensatz erfolgreich eingefügt!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Fehler beim Einfügen des Datensatzes:\nError:"+ ex.getMessage(), "ERROR !", JOptionPane.ERROR_MESSAGE);
+            MessageDisplay.error("Fehler beim Einfügen des Datensatzes:\nError:"+ ex.getMessage());
         }
     }
     
