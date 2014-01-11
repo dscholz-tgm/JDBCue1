@@ -36,8 +36,6 @@ public class Connector {
         if (con != null) con.close();
         con = ds.getConnection(cd.getUser(), cd.getPassword());
 
-        
-        con = ds.getConnection();
         status = ConnectStatus.CONNECTED;
     }
     
